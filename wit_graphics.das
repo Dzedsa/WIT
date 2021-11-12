@@ -210,7 +210,7 @@ def draw_map()
     var x = 0.0
     while x < float(get_screen_width())
         var y = 0.0
-        while y < float(get_screen_width())
+        while y < float(get_screen_height())
             img_map |> draw_image(x, y, 0xFF1B1B1B)
             y += float(img_map.height)
         x += float(img_map.width)

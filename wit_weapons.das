@@ -178,6 +178,7 @@ def check_for_weapon_switch(var w: Weapon)
 
 def switch_weapon(var w: Weapon; w_tpl: Weapon)
     weapons[w.id].ammoCurCount = w.ammoCurCount
+    stop_weapon_loop_sounds() 
     weapon_set(w, w_tpl)
 
 def weapon_set(var w: Weapon; w_tpl: Weapon)
@@ -185,6 +186,14 @@ def weapon_set(var w: Weapon; w_tpl: Weapon)
     w.reloading = false
     if w.movementSpeedWhenShootingMul <= 0.0
         w.movementSpeedWhenShootingMul = 1.0
+
+def stop_weapon_loop_sounds()     
+    if weapon.sound_start_loop && is_playing(startup_handle)
+        snd_stop(startup_handle)
+    if weapon.sound_loop && is_playing(weapon_handle)
+        snd_stop(weapon_handle)
+        if length(weapon.sound_end) > 0
+            snd_weapon_end_play(weapon.id)     
 
 def weapon_update(dt: float; var player_reload_skill: float)
     check_for_weapon_switch(weapon)
@@ -201,12 +210,7 @@ def weapon_update(dt: float; var player_reload_skill: float)
     if !check_if_shooting() || weapon.reloading == true 
         if weapon.startUpTimeMax > 0.0
             weapon.startUpTime = weapon.startUpTimeMax 
-        if weapon.sound_start_loop && is_playing(startup_handle)
-            snd_stop(startup_handle)
-        if weapon.sound_loop && is_playing(weapon_handle)
-            snd_stop(weapon_handle)
-            if length(weapon.sound_end) > 0
-                snd_weapon_end_play(weapon.id)  
+        stop_weapon_loop_sounds() 
 
 
 
