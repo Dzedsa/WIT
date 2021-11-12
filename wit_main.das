@@ -383,6 +383,7 @@ def act(var dt: float)
         is_game_active = true
     if choose_perk_window_active
         is_game_active = false  
+        check_perk_window_shortcuts()
     if !is_game_active
         return
 
