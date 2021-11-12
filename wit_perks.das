@@ -96,7 +96,15 @@ def choose_perk1()
 
 def choose_perk2()     
     push(perks_to_apply,perks_list[1].id)  
-    close_perk_window()            
+    close_perk_window()   
+
+def check_perk_window_shortcuts()
+    if get_key_down(VK_Q)  
+        choose_perk1()
+        return  
+    if get_key_down(VK_E)    
+        choose_perk2()
+        return              
 
 def perks_window_show()
     var wnd = float4(SAFE_AREA * 4.0, SAFE_AREA * 4.0, float(get_screen_width()) - SAFE_AREA * 4.0, float(get_screen_height()) - SAFE_AREA * 4.0)
@@ -116,11 +124,12 @@ def perks_window_show()
     size = get_text_size(text)
     text_out(int(wnd.x + (wnd.z-wnd.x)*0.75 - size.x/2.0), int(wnd.y + (wnd.w - wnd.y)/3.0), text, COLOR_TEXT)
 
-    text = "Choose" 
+    text = "Choose (Q)" 
     size = get_text_size(text)
     var btn_coord = float4(wnd.x + (wnd.z-wnd.x)*0.25 - size.x/2.0*2.0, wnd.y + (wnd.w - wnd.y)*0.75 - size.y/2.0*2.0, 
                      wnd.x + (wnd.z-wnd.x)*0.25 + size.x/2.0*2.0, wnd.y + (wnd.w - wnd.y)*0.75 + size.y/2.0*2.0)
     add_button(btn_coord, text, @@choose_perk1, "perks_window")
+    text = "Choose (E)" 
     btn_coord = float4(wnd.x + (wnd.z-wnd.x)*0.75 - size.x/2.0*2.0, wnd.y + (wnd.w - wnd.y)*0.75 - size.y/2.0*2.0, 
                      wnd.x + (wnd.z-wnd.x)*0.75 + size.x/2.0*2.0, wnd.y + (wnd.w - wnd.y)*0.75 + size.y/2.0*2.0)
     add_button(btn_coord, text, @@choose_perk2, "perks_window")            
