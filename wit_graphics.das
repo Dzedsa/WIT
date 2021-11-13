@@ -90,7 +90,9 @@ def graphics_init()
     //img_test <- create_image("assets/.png")
 
 
-    
+def graphics_reset()
+    clear(anim_enemy_hits)   
+    clear(anim_enemy_deaths)
 
 
 //player

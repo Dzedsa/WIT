@@ -301,6 +301,7 @@ def game_start()
     perks_init()
     enemies_init()
     interface_init()
+    graphics_reset()
 
 [export]
 def initialize()
